@@ -22,6 +22,12 @@ thoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;
 });
 
+router.route("/").get(getAllThoughts);
+router.route("/:thoughtId").get(getSingleThought);
+router.route("/").post(createThought);
+router.route("/:thoughtId").put(updateThought);
+router.route("/:thoughtId").delete(deleteThought);
+
 const Thought = model("thought", thoughtSchema);
 
 module.exports = Thought;
