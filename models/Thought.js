@@ -1,7 +1,6 @@
 const { Schema, model } = require("mongoose");
 const dateFormat = require("../utils/dateFormat");
 const reactionSchema = require("./Reaction");
-const router = require("express").Router();
 
 const thoughtSchema = new Schema(
   {
@@ -23,12 +22,6 @@ thoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;
 });
 
-// router.route("/").get(getAllThoughts);
-// router.route("/:thoughtId").get(getSingleThought);
-// router.route("/").post(createThought);
-// router.route("/:thoughtId").put(updateThought);
-// router.route("/:thoughtId").delete(deleteThought);
-
-const Thought = model("thought", thoughtSchema);
+const Thought = model("Thought", thoughtSchema);
 
 module.exports = Thought;

@@ -1,5 +1,4 @@
-const { Reaction, Thought } = require("../models");
-const { getPosts } = require("./postController");
+const { User, Thought } = require("../models");
 
 module.exports = {
   getThoughts(req, res) {
@@ -17,6 +16,16 @@ module.exports = {
   },
   createThought(req, res) {
     Thought.create(req.body)
+      .then((thought) => {
+        return User.findOneAndUpdate(
+          {
+            _id: req.body.userId,
+          },
+          { $push: { thoughts: thought._id } },
+
+          { new: true }
+        );
+      })
       .then((dbUserData) => res.json(dbUserData))
       .catch((err) => res.status(500).json(err));
   },
